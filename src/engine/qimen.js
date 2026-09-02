@@ -2,6 +2,7 @@ import { getFourPillars, TEST_RANGE } from "../calendar/week-calendar.js";
 import { buildPlate } from "./plate.js";
 import { getMethod } from "../methods/registry.js";
 import { resolveMoment } from "../time/time-service.js";
+import { getChartType } from "../chart-types/registry.js";
 
 function displayPillar(pillar) { return `${pillar.han} ${pillar.ru}`; }
 function formatDate(dateText) {
@@ -9,6 +10,8 @@ function formatDate(dateText) {
 }
 
 export function calculateChart(input) {
+  const chartType = getChartType(input.chartType || "hour");
+  if (!chartType.enabled) throw new Error(`Модуль «${chartType.id}» подготовлен, но его алгоритм ещё не прошёл проверку.`);
   if (input.date < TEST_RANGE.start || input.date > TEST_RANGE.end) throw new RangeError(`В тестовой версии доступны даты ${TEST_RANGE.start} — ${TEST_RANGE.end}.`);
   const moment = resolveMoment(input);
   const pillars = getFourPillars(moment.calculationDate, moment.branchIndex);
@@ -18,7 +21,7 @@ export function calculateChart(input) {
   const timeNote = moment.correction ? `истинное солнечное ${moment.adjustedTime} (${moment.correction > 0 ? "+" : ""}${moment.correction} мин)` : "гражданское время";
   const dayShift = moment.calculationDate !== input.date ? ` · расчётный день ${formatDate(moment.calculationDate)}` : "";
   return {
-    ...plate, method: methodResult,
+    ...plate, method: methodResult, chartType,
     title: `${moment.hourLabel} · ${displayPillar(pillars.hour)}`,
     moment: `${moment.place.name} · ${formatDate(input.date)} · ${timeNote}${dayShift}`,
     pillars, moment,

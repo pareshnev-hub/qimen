@@ -1,0 +1,41 @@
+export const en = {
+  id: "en",
+  label: "EN",
+  ui: {
+    brandTitle: "Qi Men Calculator", version: "Test week · v0.4",
+    parameters: "Chart parameters", dateAndSystem: "Date and calculation system", browserCalculation: "Calculated in browser",
+    date: "Date", time: "Time", city: "City", method: "Method", solarTime: "True solar time",
+    enabled: "Enabled", disabled: "Disabled", calculate: "Calculate", calculationTime: "Calculation time",
+    chartType: "Chart", hour: "Hour", day: "Day", month: "Month", year: "Year", soon: "after verification",
+    decode: "Details", returnChart: "Return chart", clickPalace: "Select a palace to reveal its details",
+    sourceData: "Source data", fourPillars: "Four Pillars", season: "Season", system: "System",
+    condition: "Pattern", focus: "Focus 1 · day / hour", hourlyChart: "Hour chart",
+    ninePalaces: "Lo Shu · Nine Palaces", dayFocus: "Day", hourFocus: "Hour",
+    fullscreen: "Full screen", exitFullscreen: "Exit full screen", design: "View", theme: "Theme",
+    light: "Light", dark: "Dark", symbols: "Symbols", compact: "Compact", standard: "Standard", large: "Large",
+    language: "Language", legend: "Legend", showTrace: "Show calculation trace",
+    ratNote: "The Rat hour is one interval from 23:00 to 01:00 and belongs to the following calculation day.",
+    frontHelp: "The front shows the symbolic chart. Flip a palace for Russian or English details.",
+    futureModule: "This chart algorithm has not been verified yet.", chartNumber: "Chart", engine: "Engine",
+    void: "Void", horse: "Travel Horse", chief: "Chief", composition: "Palace contents",
+    states: "States", noStates: "No special states", futureAnalysis: "Extended interpretation will be connected as a separate module",
+    previous: "Previous", next: "Next"
+  },
+  chartTypes: { hour: "Hour", day: "Day", month: "Month", year: "Year" },
+  methods: { "chai-bu": "Chai Bu", "zhi-run": "Zhi Run" },
+  elements: { wood: "Wood", fire: "Fire", earth: "Earth", metal: "Metal", water: "Water" },
+  polarity: { yang: "Yang", yin: "Yin" },
+  pillars: { hour: "Hour", day: "Day", month: "Month", year: "Year" },
+  palaces: {
+    1:["Kan","North"], 2:["Kun","Southwest"], 3:["Zhen","East"], 4:["Xun","Southeast"], 5:["Center","Center"],
+    6:["Qian","Northwest"], 7:["Dui","West"], 8:["Gen","Northeast"], 9:["Li","South"]
+  },
+  directions: { se:"SE", s:"S", sw:"SW", e:"E", w:"W", ne:"NE", n:"N", nw:"NW" },
+  stems: { 甲:"Jia",乙:"Yi",丙:"Bing",丁:"Ding",戊:"Wu",己:"Ji",庚:"Geng",辛:"Xin",壬:"Ren",癸:"Gui" },
+  branches: { 子:"Zi",丑:"Chou",寅:"Yin",卯:"Mao",辰:"Chen",巳:"Si",午:"Wu",未:"Wei",申:"Shen",酉:"You",戌:"Xu",亥:"Hai" },
+  animals: { 子:"Rat",丑:"Ox",寅:"Tiger",卯:"Rabbit",辰:"Dragon",巳:"Snake",午:"Horse",未:"Goat",申:"Monkey",酉:"Rooster",戌:"Dog",亥:"Pig" },
+  deities: { 值符:"Zhi Fu",螣蛇:"Teng She",太阴:"Tai Yin",六合:"Liu He",白虎:"Bai Hu",玄武:"Xuan Wu",九地:"Jiu Di",九天:"Jiu Tian" },
+  gates: { 休:"Xiu Men",死:"Si Men",伤:"Shang Men",杜:"Du Men",开:"Kai Men",惊:"Jing Men",生:"Sheng Men",景:"Jing Men" },
+  stars: { 天蓬:"Tian Peng",天芮:"Tian Rui",天冲:"Tian Chong",天辅:"Tian Fu",天禽:"Tian Qin",天心:"Tian Xin",天柱:"Tian Zhu",天任:"Tian Ren",天英:"Tian Ying" },
+  seasons: { chushu:"Chu Shu · End of Heat", bailu:"Bai Lu · White Dew" }
+};

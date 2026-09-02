@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light" data-symbol-size="standard">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,123 +12,114 @@
       <header class="brandbar">
         <div class="brand">
           <span class="brand-mark" aria-hidden="true">奇</span>
-          <div>
-            <p>时家奇门</p>
-            <h1>Калькулятор Ци Мэнь</h1>
-          </div>
+          <div><p>时家奇门</p><h1 data-i18n="brandTitle">Калькулятор Ци Мэнь</h1></div>
         </div>
-        <span class="version">Тестовая неделя · v0.3</span>
+        <div class="header-settings">
+          <label class="compact-select"><span data-i18n="language">Язык</span><select id="language"></select></label>
+          <button id="theme-toggle" class="icon-button" type="button" aria-label="Тема"><span aria-hidden="true">◐</span><b data-i18n="dark">Тёмная</b></button>
+          <span class="version" data-i18n="version">Тестовая неделя · v0.4</span>
+        </div>
       </header>
 
       <section class="control-panel" aria-labelledby="input-title">
         <div class="control-heading">
-          <div>
-            <p class="section-kicker">Параметры карты</p>
-            <h2 id="input-title">Дата и система расчёта</h2>
-          </div>
-          <span class="browser-badge"><i></i> Расчёт в браузере</span>
+          <div><p class="section-kicker" data-i18n="parameters">Параметры карты</p><h2 id="input-title" data-i18n="dateAndSystem">Дата и система расчёта</h2></div>
+          <span class="browser-badge"><i></i><span data-i18n="browserCalculation">Расчёт в браузере</span></span>
         </div>
-
         <form id="chart-form" class="controls">
-          <label>
-            <span>Дата</span>
-            <input id="date" type="date" min="2026-08-31" max="2026-09-06" value="2026-09-02" required />
-          </label>
-          <label>
-            <span>Время</span>
-            <input id="time" type="time" value="21:00" step="60" required />
-          </label>
-          <label>
-            <span>Город</span>
-            <select id="place">
-              <option value="sochi">Сочи · UTC+3</option>
-            </select>
-          </label>
-          <label>
-            <span>Метод</span>
-            <select id="method">
-              <option value="chai-bu">Чай-Бу 拆補法</option>
-              <option value="zhi-run">Чжи Жунь 置闰法</option>
-            </select>
-          </label>
+          <label><span data-i18n="date">Дата</span><input id="date" type="date" min="2026-08-31" max="2026-09-06" value="2026-09-02" required /></label>
+          <label><span data-i18n="time">Время</span><input id="time" type="time" value="05:00" step="60" required /></label>
+          <label><span data-i18n="city">Город</span><select id="place"><option value="sochi">Сочи · UTC+3</option></select></label>
+          <label><span data-i18n="method">Метод</span><select id="method"><option value="chai-bu">Чай-Бу 拆補法</option><option value="zhi-run">Чжи Жунь 置闰法</option></select></label>
           <label class="solar-control">
-            <input id="solar-time" type="checkbox" />
-            <span class="switch" aria-hidden="true"></span>
-            <span><strong>Солнечное время</strong><small id="solar-hint">Выключено</small></span>
+            <input id="solar-time" type="checkbox" /><span class="switch" aria-hidden="true"></span>
+            <span><strong data-i18n="solarTime">Солнечное время</strong><small id="solar-hint">Выключено</small></span>
           </label>
-          <button class="calculate-button" type="submit">Рассчитать</button>
+          <button class="calculate-button" type="submit" data-i18n="calculate">Рассчитать</button>
         </form>
         <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </section>
 
       <section id="result" class="result" aria-live="polite">
-        <div class="result-toolbar">
-          <div>
-            <p id="chart-moment" class="section-kicker"></p>
-            <h2 id="chart-heading"></h2>
+        <div class="modebar">
+          <div class="mode-group"><span data-i18n="chartType">Расклад</span><div id="chart-type-switch" class="segmented" role="group"></div></div>
+          <div class="display-settings">
+            <label><span data-i18n="symbols">Символы</span><select id="symbol-size"><option value="compact" data-i18n="compact">Компактные</option><option value="standard" data-i18n="standard" selected>Стандартные</option><option value="large" data-i18n="large">Крупные</option></select></label>
+            <button id="legend-toggle" class="secondary-button" type="button" data-i18n="legend">Обозначения</button>
           </div>
+        </div>
+
+        <div id="legend-panel" class="legend-panel" hidden>
+          <span><b class="frame-sample chief-frame"></b><i data-i18n="chief">Главный</i></span>
+          <span><b class="void-sample"></b><i data-i18n="void">Пустота</i></span>
+          <span><b class="horse-sample">♞</b><i data-i18n="horse">Лошадь</i></span>
+          <span class="element-key"><i class="wood">木</i><i class="fire">火</i><i class="earth">土</i><i class="metal">金</i><i class="water">水</i></span>
+        </div>
+
+        <div class="result-toolbar">
+          <div><p class="section-kicker" data-i18n="calculationTime">Расчётное время</p><div id="chart-heading" class="calculation-time"></div><p id="chart-moment" class="moment-note"></p></div>
           <div class="view-actions">
-            <span class="view-hint">Нажмите на дворец, чтобы открыть его</span>
-            <button id="flip-all" class="flip-button" type="button" aria-pressed="false">
-              <span class="flip-icon" aria-hidden="true">↻</span>
-              <span class="flip-label">Расшифровка</span>
-            </button>
+            <button id="fullscreen-button" class="secondary-button" type="button"><span aria-hidden="true">⛶</span><span data-i18n="fullscreen">На весь экран</span></button>
+            <button id="flip-all" class="flip-button" type="button" aria-pressed="false"><span class="flip-icon" aria-hidden="true">↻</span><span class="flip-label" data-i18n="decode">Расшифровка</span></button>
           </div>
         </div>
 
         <div class="calculation-workspace">
           <aside class="pillar-panel" aria-labelledby="pillars-title">
-            <div class="panel-title">
-              <p class="section-kicker">Исходные данные</p>
-              <h2 id="pillars-title">Четыре столпа</h2>
-            </div>
+            <div class="panel-title"><p class="section-kicker" data-i18n="sourceData">Исходные данные</p><h2 id="pillars-title" data-i18n="fourPillars">Четыре столпа</h2></div>
             <div id="pillar-board" class="pillar-board"></div>
-
             <dl class="facts">
-              <div><dt>Сезон</dt><dd id="season"></dd></div>
-              <div><dt>Система</dt><dd id="dun-badge"></dd></div>
-              <div><dt>旬首 · Сюнь-шоу</dt><dd id="xunshou"></dd></div>
-              <div><dt>值符 · Чжи Фу</dt><dd id="zhifu"></dd></div>
-              <div><dt>值使 · Чжи Ши</dt><dd id="zhishi"></dd></div>
-              <div><dt>Состояние</dt><dd id="pattern"></dd></div>
+              <div><dt data-i18n="season">Сезон</dt><dd id="season"></dd></div>
+              <div><dt data-i18n="system">Система</dt><dd id="dun-badge"></dd></div>
+              <div><dt>旬首</dt><dd id="xunshou"></dd></div>
+              <div><dt>值符</dt><dd id="zhifu"></dd></div>
+              <div><dt>值使</dt><dd id="zhishi"></dd></div>
+              <div><dt data-i18n="condition">Состояние</dt><dd id="pattern"></dd></div>
+              <div><dt data-i18n="chartNumber">Карта</dt><dd id="chart-number"></dd></div>
             </dl>
-
-            <div class="focus-box">
-              <span>Точка фокуса 1 · день / час</span>
-              <strong id="focus-summary"></strong>
-            </div>
+            <div class="focus-box"><span data-i18n="focus">Точка фокуса 1 · день / час</span><strong id="focus-summary"></strong></div>
           </aside>
 
-          <section class="chart-panel" aria-labelledby="map-title">
+          <section id="chart-panel" class="chart-panel" aria-labelledby="map-title">
             <div class="chart-caption">
-              <div>
-                <p class="section-kicker">Лошу · девять дворцов</p>
-                <h2 id="map-title">Часовая карта</h2>
-              </div>
-              <div class="legend" aria-label="Легенда">
-                <span><i class="day-dot"></i> День</span>
-                <span><i class="hour-dot"></i> Час</span>
-              </div>
+              <div><p class="section-kicker" data-i18n="ninePalaces">Лошу · девять дворцов</p><h2 id="map-title" data-i18n="hourlyChart">Часовая карта</h2></div>
+              <span class="view-hint" data-i18n="clickPalace">Нажмите на дворец, чтобы открыть его</span>
             </div>
 
             <div class="map-frame">
-              <div class="compass compass-top"><b>ЮВ</b><span>巳</span><b>Ю · 午</b><span>未</span><b>ЮЗ</b></div>
-              <div class="map-middle">
-                <div class="compass compass-side compass-left"><span>辰</span><b>В · 卯</b><span>寅</span></div>
-                <div id="palace-grid" class="palace-grid"></div>
-                <div class="compass compass-side compass-right"><span>申</span><b>З · 酉</b><span>戌</span></div>
+              <div class="edge-grid edge-top">
+                <span class="edge-marker" style="grid-column:1"><b>巳</b><small data-direction="se">ЮВ</small></span>
+                <span class="edge-marker" style="grid-column:2"><b>午</b><small data-direction="s">Ю</small></span>
+                <span class="edge-marker" style="grid-column:3"><b>未</b><small data-direction="sw">ЮЗ</small></span>
               </div>
-              <div class="compass compass-bottom"><b>СВ</b><span>丑</span><b>С · 子</b><span>亥</span><b>СЗ</b></div>
+              <div class="map-row">
+                <div class="edge-side edge-left">
+                  <span class="edge-marker"><b>辰</b><small data-direction="se">ЮВ</small></span>
+                  <span class="edge-marker"><b>卯</b><small data-direction="e">В</small></span>
+                  <span class="edge-marker"><b>寅</b><small data-direction="ne">СВ</small></span>
+                </div>
+                <div id="palace-grid" class="palace-grid"></div>
+                <div class="edge-side edge-right">
+                  <span class="edge-marker"><b>申</b><small data-direction="sw">ЮЗ</small></span>
+                  <span class="edge-marker"><b>酉</b><small data-direction="w">З</small></span>
+                  <span class="edge-marker"><b>戌</b><small data-direction="nw">СЗ</small></span>
+                </div>
+              </div>
+              <div class="edge-grid edge-bottom">
+                <span class="edge-marker" style="grid-column:1"><b>丑</b><small data-direction="ne">СВ</small></span>
+                <span class="edge-marker" style="grid-column:2"><b>子</b><small data-direction="n">С</small></span>
+                <span class="edge-marker" style="grid-column:3"><b>亥</b><small data-direction="nw">СЗ</small></span>
+              </div>
             </div>
-
-            <p class="card-help">Лицевая сторона показывает схему символов. На обороте — названия и основные сведения о дворце.</p>
+            <p class="card-help" data-i18n="frontHelp">Лицевая сторона — схема символов. На обороте — русская или английская расшифровка.</p>
           </section>
         </div>
 
         <details class="trace">
-          <summary>Показать цепочку расчёта</summary>
+          <summary data-i18n="showTrace">Показать цепочку расчёта</summary>
           <ol id="trace-list"></ol>
-          <p>Час Крысы используется единым интервалом 23:00–00:59 и относится к следующему расчётному дню.</p>
+          <p data-i18n="ratNote">Час Крысы используется единым интервалом 23:00–01:00 и относится к следующему расчётному дню.</p>
+          <small id="engine-version"></small>
         </details>
       </section>
     </main>

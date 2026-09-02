@@ -74,8 +74,23 @@ export function buildPlate({ dun, ju, pillars }) {
   const focus = { day: findHeaven(focusStem(pillars.day.stem)), hour: findHeaven(focusStem(pillars.hour.stem)) };
   const normalizedStarShift = ((starShift % 8) + 8) % 8;
   const normalizedGateShift = ((gateShift % 8) + 8) % 8;
+  const voidBranchPairs = [["戌", "亥"], ["申", "酉"], ["午", "未"], ["辰", "巳"], ["寅", "卯"], ["子", "丑"]];
+  const branchPalace = { 子:1, 丑:8, 寅:8, 卯:3, 辰:4, 巳:4, 午:9, 未:2, 申:2, 酉:7, 戌:6, 亥:6 };
+  const voidBranches = voidBranchPairs[xunIndex];
+  const voidPalaces = [...new Set(voidBranches.map(branch => branchPalace[branch]))];
+  const horseByGroup = {
+    申: "寅", 子: "寅", 辰: "寅",
+    寅: "申", 午: "申", 戌: "申",
+    亥: "巳", 卯: "巳", 未: "巳",
+    巳: "亥", 酉: "亥", 丑: "亥"
+  };
+  const horseBranch = horseByGroup[pillars.hour.branch];
+  const horsePalace = branchPalace[horseBranch];
+  const chartNumber = ((dun === "yang" ? 0 : 9) + (ju - 1)) * 60 + pillars.hour.index + 1;
+  const chartKey = `${dun}-${ju}-${String(pillars.hour.index).padStart(2, "0")}`;
   return {
     earth, palaces, xunshou, hiddenJia, chiefOrigin, chiefTarget, chiefGateTarget, focus,
+    voidBranches, voidPalaces, horseBranch, horsePalace, chartNumber, chartKey,
     chiefStar: STARS[chiefSource], chiefGate: GATES[chiefGateOrigin],
     pattern: normalizedStarShift === 0 && normalizedGateShift === 0 ? "Фу Инь" : normalizedStarShift === 4 && normalizedGateShift === 4 ? "Фань Инь" : "Обычная ротация"
   };

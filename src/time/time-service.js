@@ -33,6 +33,10 @@ export function resolveMoment({ date, time, placeId, useTrueSolarTime }) {
     if (hour >= 23) calculationDate = addDays(adjusted.date, 1);
   } else branchIndex = Math.floor((hour + 1) / 2);
   const start = branchIndex === 0 ? "23:00" : `${String(branchIndex * 2 - 1).padStart(2, "0")}:00`;
-  const end = branchIndex === 0 ? "00:59" : `${String(branchIndex * 2).padStart(2, "0")}:59`;
-  return { place, correction, adjustedDate: adjusted.date, adjustedTime: adjusted.time, calculationDate, branchIndex, hourLabel: `${start}–${end} · час ${ANIMALS_RU[branchIndex]} ${BRANCHES[branchIndex]}` };
+  const end = branchIndex === 0 ? "01:00" : `${String(branchIndex * 2 + 1).padStart(2, "0")}:00`;
+  return {
+    place, correction, adjustedDate: adjusted.date, adjustedTime: adjusted.time,
+    calculationDate, branchIndex, periodStart: start, periodEnd: end,
+    hourLabel: `${start}–${end} · час ${ANIMALS_RU[branchIndex]} ${BRANCHES[branchIndex]}`
+  };
 }
