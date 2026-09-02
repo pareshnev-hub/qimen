@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Тестовый веб-калькулятор часовой карты Ци Мэнь Дунь Цзя по методу Чай-Бу" />
+    <title>Калькулятор Ци Мэнь — Чай-Бу</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Ци Мэнь Дунь Цзя · 拆補法</p>
+          <h1>Калькулятор Чай-Бу</h1>
+        </div>
+        <span class="version">Прототип v0.1</span>
+      </header>
+
+      <section class="control-panel" aria-labelledby="input-title">
+        <div class="control-heading">
+          <div>
+            <h2 id="input-title">Параметры карты</h2>
+            <p>Пока доступны два контрольных часа для проверки интерфейса и логики.</p>
+          </div>
+          <div class="status-pill"><span></span> Расчёт в браузере</div>
+        </div>
+
+        <form id="chart-form" class="controls">
+          <label>
+            <span>Дата</span>
+            <input id="date" type="date" value="2026-09-02" required />
+          </label>
+          <label>
+            <span>Час</span>
+            <select id="hour">
+              <option value="19">19:00–20:59 · Собака 戌</option>
+              <option value="21" selected>21:00–22:59 · Свинья 亥</option>
+            </select>
+          </label>
+          <label>
+            <span>Место</span>
+            <select id="place">
+              <option value="sochi">Сочи</option>
+            </select>
+          </label>
+          <label>
+            <span>Метод</span>
+            <select id="method">
+              <option value="chaibu">Чай-Бу 拆補</option>
+            </select>
+          </label>
+          <button type="submit">Рассчитать карту</button>
+        </form>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="result" class="result" aria-live="polite">
+        <div class="summary-card">
+          <div class="summary-title">
+            <div>
+              <p id="chart-moment" class="eyebrow"></p>
+              <h2 id="chart-heading"></h2>
+            </div>
+            <div id="dun-badge" class="dun-badge"></div>
+          </div>
+
+          <div class="pillars" aria-label="Четыре столпа">
+            <div><span>Год</span><strong id="year-pillar"></strong></div>
+            <div><span>Месяц</span><strong id="month-pillar"></strong></div>
+            <div><span>День</span><strong id="day-pillar"></strong></div>
+            <div><span>Час</span><strong id="hour-pillar"></strong></div>
+          </div>
+
+          <div class="key-facts">
+            <div><span>旬首 / Сюнь-шоу</span><strong id="xunshou"></strong></div>
+            <div><span>值符 / Чжи Фу</span><strong id="zhifu"></strong></div>
+            <div><span>值使 / Чжи Ши</span><strong id="zhishi"></strong></div>
+            <div><span>Состояние</span><strong id="pattern"></strong></div>
+          </div>
+        </div>
+
+        <div class="workspace">
+          <section aria-labelledby="map-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Лошу · 9 дворцов</p>
+                <h2 id="map-title">Итоговая карта</h2>
+              </div>
+              <div class="legend">
+                <span><i class="day-dot"></i> День</span>
+                <span><i class="hour-dot"></i> Час</span>
+              </div>
+            </div>
+            <div id="palace-grid" class="palace-grid"></div>
+          </section>
+
+          <aside class="trace" aria-labelledby="trace-title">
+            <p class="eyebrow">Проверяемый расчёт</p>
+            <h2 id="trace-title">Цепочка</h2>
+            <ol id="trace-list"></ol>
+            <div class="focus-box">
+              <span>Точка фокуса 1</span>
+              <strong id="focus-summary"></strong>
+            </div>
+            <p class="prototype-note">Это контрольная версия: карта берётся из подтверждённого набора примеров. Полный календарный движок подключается следующим этапом.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
