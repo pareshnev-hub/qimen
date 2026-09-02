@@ -62,7 +62,7 @@ h2 { font-size: 1.15rem; letter-spacing: -0.015em; }
 .status-pill { color: var(--jade); font-size: 0.8rem; white-space: nowrap; }
 .status-pill span { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--jade); margin-right: 7px; box-shadow: 0 0 0 5px rgba(109, 214, 162, 0.09); }
 
-.controls { display: grid; grid-template-columns: 1fr 1.5fr 1fr 1fr auto; gap: 12px; margin-top: 20px; align-items: end; }
+.controls { display: grid; grid-template-columns: 1fr 1fr 1fr 1.25fr auto; gap: 12px; margin-top: 20px; align-items: end; }
 label { display: grid; gap: 7px; color: var(--muted); font-size: 0.82rem; }
 input, select {
   width: 100%;
@@ -86,6 +86,17 @@ button {
   cursor: pointer;
 }
 button:hover { background: #84e8b6; }
+.option-row { display: flex; justify-content: space-between; align-items: center; gap: 22px; border-top: 1px solid var(--line); margin-top: 18px; padding-top: 17px; }
+.option-row > p { color: var(--muted); font-size: 0.78rem; text-align: right; }
+.option-row > p strong { color: var(--text); }
+.switch-label { display: flex; grid-template-columns: none; align-items: center; gap: 10px; cursor: pointer; }
+.switch-label input { position: absolute; opacity: 0; pointer-events: none; }
+.switch-label > span:last-child { display: grid; gap: 2px; color: var(--text); }
+.switch-label small { color: var(--muted); font-size: 0.7rem; }
+.switch { width: 42px; height: 24px; border-radius: 999px; background: #26342f; border: 1px solid var(--line); position: relative; flex: 0 0 auto; transition: .2s ease; }
+.switch::after { content: ""; position: absolute; width: 16px; height: 16px; top: 3px; left: 4px; border-radius: 50%; background: var(--muted); transition: .2s ease; }
+.switch-label input:checked + .switch { background: rgba(109, 214, 162, .24); border-color: var(--jade); }
+.switch-label input:checked + .switch::after { transform: translateX(17px); background: var(--jade); }
 .form-message { min-height: 1.2em; color: var(--coral); font-size: 0.88rem; margin-top: 10px; }
 
 .summary-card { border-radius: 18px; padding: 24px; margin-bottom: 18px; }
@@ -98,7 +109,7 @@ button:hover { background: #84e8b6; }
 .pillars div:last-child { border-right: 0; }
 .pillars span, .key-facts span, .focus-box span { display: block; color: var(--muted); font-size: 0.74rem; margin-bottom: 6px; }
 .pillars strong { font-size: 1.25rem; font-weight: 640; }
-.key-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.key-facts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
 .key-facts strong { font-size: 0.95rem; }
 
 .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
@@ -162,6 +173,8 @@ button:hover { background: #84e8b6; }
   .status-pill { display: none; }
   .controls { grid-template-columns: 1fr; }
   .controls button { grid-column: auto; }
+  .option-row { align-items: flex-start; flex-direction: column; }
+  .option-row > p { text-align: left; }
   .pillars, .key-facts { grid-template-columns: repeat(2, 1fr); }
   .pillars div:nth-child(2) { border-right: 0; }
   .pillars div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }

@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Тестовый веб-калькулятор часовой карты Ци Мэнь Дунь Цзя по методу Чай-Бу" />
-    <title>Калькулятор Ци Мэнь — Чай-Бу</title>
+    <meta name="description" content="Тестовый расчётный калькулятор часовой карты Ци Мэнь Дунь Цзя" />
+    <title>Калькулятор Ци Мэнь</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Ци Мэнь Дунь Цзя · 拆補法</p>
-          <h1>Калькулятор Чай-Бу</h1>
+          <p class="eyebrow">Ци Мэнь Дунь Цзя · 时家奇门</p>
+          <h1>Калькулятор Ци Мэнь</h1>
         </div>
-        <span class="version">Прототип v0.1</span>
+        <span class="version">Тестовая версия v0.2</span>
       </header>
 
       <section class="control-panel" aria-labelledby="input-title">
         <div class="control-heading">
           <div>
             <h2 id="input-title">Параметры карты</h2>
-            <p>Пока доступны два контрольных часа для проверки интерфейса и логики.</p>
+            <p>Реальный расчёт для тестовой недели: 31 августа — 6 сентября 2026.</p>
           </div>
           <div class="status-pill"><span></span> Расчёт в браузере</div>
         </div>
@@ -29,14 +29,11 @@
         <form id="chart-form" class="controls">
           <label>
             <span>Дата</span>
-            <input id="date" type="date" value="2026-09-02" required />
+            <input id="date" type="date" min="2026-08-31" max="2026-09-06" value="2026-09-02" required />
           </label>
           <label>
             <span>Час</span>
-            <select id="hour">
-              <option value="19">19:00–20:59 · Собака 戌</option>
-              <option value="21" selected>21:00–22:59 · Свинья 亥</option>
-            </select>
+            <input id="time" type="time" value="21:00" step="60" required />
           </label>
           <label>
             <span>Место</span>
@@ -47,11 +44,20 @@
           <label>
             <span>Метод</span>
             <select id="method">
-              <option value="chaibu">Чай-Бу 拆補</option>
+              <option value="chai-bu">Чай-Бу 拆補法</option>
+              <option value="zhi-run">Чжи Жунь 置闰法</option>
             </select>
           </label>
           <button type="submit">Рассчитать карту</button>
         </form>
+        <div class="option-row">
+          <label class="switch-label">
+            <input id="solar-time" type="checkbox" />
+            <span class="switch" aria-hidden="true"></span>
+            <span><strong>Истинное солнечное время</strong><small id="solar-hint">Выкл. · используется гражданское время</small></span>
+          </label>
+          <p><strong>Час Крысы:</strong> единый интервал 23:00–00:59, относится к следующему расчётному дню.</p>
+        </div>
         <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </section>
 
@@ -73,6 +79,7 @@
           </div>
 
           <div class="key-facts">
+            <div><span>Сезон</span><strong id="season"></strong></div>
             <div><span>旬首 / Сюнь-шоу</span><strong id="xunshou"></strong></div>
             <div><span>值符 / Чжи Фу</span><strong id="zhifu"></strong></div>
             <div><span>值使 / Чжи Ши</span><strong id="zhishi"></strong></div>
@@ -103,11 +110,11 @@
               <span>Точка фокуса 1</span>
               <strong id="focus-summary"></strong>
             </div>
-            <p class="prototype-note">Это контрольная версия: карта берётся из подтверждённого набора примеров. Полный календарный движок подключается следующим этапом.</p>
+            <p class="prototype-note">Карта строится функциями, а не подставляется картинкой. Календарь этой версии намеренно ограничен тестовой неделей; расчётный движок и интерфейс находятся в разных модулях.</p>
           </aside>
         </div>
       </section>
     </main>
-    <script src="./app.js"></script>
+    <script type="module" src="./src/interface/app.js"></script>
   </body>
 </html>
